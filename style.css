@@ -2,6 +2,10 @@ body    {
     background: rgb(68, 66, 66);
    
 }
+#info   {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
 h1  {
     max-width: fit-content;
     margin-left: auto;

@@ -10,7 +10,12 @@
     <title>tictactoe</title>
 </head>
 <body>
-    <h1 class = 'kalam-regular'>Tic Tac Toe<br></h1>
+    <div id="info">
+        <h1 class="kalam-regular">Player1:0</h1>
+        <h1 class = 'kalam-regular'>Tic Tac Toe<br></h1>
+        <h1 class="kalam-regular">Player2:0</h1>
+    </div>
+    
     <div id="game_board">
         <ul id = 'row0'>
             <li id="cell1">Q
@@ -28,7 +33,9 @@
             <li id="cell9">Q
         </ul>
     </div>
-
+    <input id="reset" type="button" value="reset game">
+    <input id="p1name" type="button" value="Change Player One name">
+    <input id="p2name" type="button" value="change Player Two name">
     <script src="script.js"></script>
 </body>
 </html>

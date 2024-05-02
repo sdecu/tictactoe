@@ -36,7 +36,7 @@ const playerModule = (function () {
 let round = 2;
 gameController = (function()  {
   const players = playerModule.getPlayers();
-
+  cells = [cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, cell9];
   cell1 = document.querySelector("#cell1");
   cell2 = document.querySelector("#cell2");
   cell3 = document.querySelector("#cell3");
@@ -46,6 +46,7 @@ gameController = (function()  {
   cell7 = document.querySelector("#cell7");
   cell8 = document.querySelector("#cell8");
   cell9 = document.querySelector("#cell9");
+  cells = [cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, cell9];
   
   function playerTurn (x, y, a) {
     if  (a.textContent =="X" || a.textContent == "O") {
@@ -72,5 +73,18 @@ gameController = (function()  {
     cell7.addEventListener('click', (event) => playerTurn (2, 0, cell7));
     cell8.addEventListener('click', (event) => playerTurn (2, 1, cell8));
     cell9.addEventListener('click', (event) => playerTurn (2, 2, cell9));
-  
+
+    return{cells}
+})();
+
+newGame = (function ()  {
+  resetbtn = document.querySelector("#reset");
+
+  function  reset ()  {
+    for (const i of gameController.cells) {
+      i.textContent = "Q";
+      i.style.color = "rgb(68, 66, 66)";
+    }
+  }
+  resetbtn.addEventListener("click", (event) =>  reset())
 })();
