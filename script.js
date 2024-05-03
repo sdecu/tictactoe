@@ -24,7 +24,7 @@ const playerModule = (function () {
         player2.name = "Player Two";
         player2.token = "O";
       } 
-  
+  assignPlayer();
     function getPlayers() {
       return { player1, player2 };
     }
@@ -35,6 +35,7 @@ const playerModule = (function () {
 //connect each cell to its corresponding position in the 2d array 
 let round = 2;
 gameController = (function()  {
+
   const players = playerModule.getPlayers();
   cells = [cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, cell9];
   cell1 = document.querySelector("#cell1");
@@ -54,12 +55,12 @@ gameController = (function()  {
     } else if (round%2 === 0)  {
       gameBoard.action(x, y, players.player1.token);
       round++;
-      a.textContent = "X";
+      a.textContent = players.player1.token;
       a.style.color = 'black';
     } else  { 
       gameBoard.action(x, y, players.player2.token);
       round++;
-      a.textContent = "O";
+      a.textContent = players.player2.token;
       a.style.color = 'black';
     }
     
@@ -84,9 +85,11 @@ newGame = (function ()  {
     for (const i of gameController.cells) {
       i.textContent = "Q";
       i.style.color = "rgb(68, 66, 66)";
+      round = 2;
     }
   }
   resetbtn.addEventListener("click", (event) =>  reset());
+  return  {reset}
 })();
 
 changePlayerName  = (function ()  {
