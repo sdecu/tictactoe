@@ -1,5 +1,5 @@
 gameBoard = (function ()    {
-    let gameState = new Array(3).fill().map(()=>new Array(3).fill(null));
+    let gameState = new Array(3).fill().map(()=>new Array(3).fill(undefined));
 
     function action(i, j, token)   {
         gameState[i][j] = token;
@@ -86,5 +86,21 @@ newGame = (function ()  {
       i.style.color = "rgb(68, 66, 66)";
     }
   }
-  resetbtn.addEventListener("click", (event) =>  reset())
+  resetbtn.addEventListener("click", (event) =>  reset());
+})();
+
+changePlayerName  = (function ()  {
+  p1Name = document.querySelector("#p1_name");
+  p2Name = document.querySelector("#p2_name");
+  p1NameBtn = document.querySelector("#p1_name_btn");
+  p2NameBtn = document.querySelector("#p2_name_btn");
+  nameBtns = [p1NameBtn, p2NameBtn];
+  
+function  changeName(x)  {
+  let name = prompt("What's your name?");
+  x.textContent = `${name}`;
+}
+
+p1NameBtn.addEventListener('click', (event) =>  changeName(p1Name));
+p2NameBtn.addEventListener('click', (event) =>  changeName(p2Name));
 })();

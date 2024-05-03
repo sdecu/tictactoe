@@ -11,9 +11,17 @@
 </head>
 <body>
     <div id="info">
-        <h1 class="kalam-regular">Player1:0</h1>
+        <div id="p1">
+            <h1 id="p1_name" class="kalam-regular">Player1</h1>
+            <h1 id="p1_score" class="kalam-regular">0</h1>
+        </div>
+        
         <h1 class = 'kalam-regular'>Tic Tac Toe<br></h1>
-        <h1 class="kalam-regular">Player2:0</h1>
+        <div id="p2">
+            <h1 id="p2_name" class="kalam-regular">Player2</h1>
+            <h1 id="p2_score" class="kalam-regular">0</h1>
+        </div>
+          
     </div>
     
     <div id="game_board">
@@ -34,8 +42,8 @@
         </ul>
     </div>
     <input id="reset" type="button" value="reset game">
-    <input id="p1name" type="button" value="Change Player One name">
-    <input id="p2name" type="button" value="change Player Two name">
+    <input id="p1_name_btn" type="button" value="Change Player One name">
+    <input id="p2_name_btn" type="button" value="change Player Two name">
     <script src="script.js"></script>
 </body>
 </html>
