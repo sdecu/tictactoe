@@ -55,11 +55,13 @@ gameController = (function()  {
     } else if (round%2 === 0)  {
       gameBoard.action(x, y, players.player1.token);
       round++;
+      playerScore.run();
       a.textContent = players.player1.token;
       a.style.color = 'black';
     } else  { 
       gameBoard.action(x, y, players.player2.token);
       round++;
+      playerScore.run();
       a.textContent = players.player2.token;
       a.style.color = 'black';
     }
@@ -81,13 +83,21 @@ gameController = (function()  {
 newGame = (function ()  {
   resetbtn = document.querySelector("#reset");
 
-  function  reset ()  {
+  function  reset ()  { 
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        gameBoard.action(i, j, undefined);
+      }
+    }
+
     for (const i of gameController.cells) {
       i.textContent = "Q";
       i.style.color = "rgb(68, 66, 66)";
-      round = 2;
+      
     }
+    round = 2;
   }
+
   resetbtn.addEventListener("click", (event) =>  reset());
   return  {reset}
 })();
@@ -106,4 +116,82 @@ function  changeName(x)  {
 
 p1NameBtn.addEventListener('click', (event) =>  changeName(p1Name));
 p2NameBtn.addEventListener('click', (event) =>  changeName(p2Name));
+})();
+
+playerScore = (function() {
+ const p1ScoreSelector = document.querySelector("#p1_score");
+ const p2ScoreSelector = document.querySelector("#p2_score");
+let p1Score = 0;
+let p2Score = 0 
+
+  function run()  {
+    if ( 
+  // Check rows
+  gameBoard.getGameState().at(0).at(0) == "X" &&
+  gameBoard.getGameState().at(0).at(1) == "X" &&
+  gameBoard.getGameState().at(0).at(2) == "X" ||
+  gameBoard.getGameState().at(1).at(0) == "X" &&
+  gameBoard.getGameState().at(1).at(1) == "X" &&
+  gameBoard.getGameState().at(1).at(2) == "X" ||
+  gameBoard.getGameState().at(2).at(0) == "X" &&
+  gameBoard.getGameState().at(2).at(1) == "X" &&
+  gameBoard.getGameState().at(2).at(2) == "X" ||
+
+  // Check columns
+  gameBoard.getGameState().at(0).at(0) == "X" &&
+  gameBoard.getGameState().at(1).at(0) == "X" &&
+  gameBoard.getGameState().at(2).at(0) == "X" ||
+  gameBoard.getGameState().at(0).at(1) == "X" &&
+  gameBoard.getGameState().at(1).at(1) == "X" &&
+  gameBoard.getGameState().at(2).at(1) == "X" ||
+  gameBoard.getGameState().at(0).at(2) == "X" &&
+  gameBoard.getGameState().at(1).at(2) == "X" &&
+  gameBoard.getGameState().at(2).at(2) == "X" ||
+
+  // Check diagonals
+  gameBoard.getGameState().at(0).at(0) == "X" &&
+  gameBoard.getGameState().at(1).at(1) == "X" &&
+  gameBoard.getGameState().at(2).at(2) == "X" ||
+  gameBoard.getGameState().at(0).at(2) == "X" &&
+  gameBoard.getGameState().at(1).at(1) == "X" &&
+  gameBoard.getGameState().at(2).at(0) == "X") {
+  p1Score++;
+  p1ScoreSelector.textContent = `${p1Score}`;
+ } else if (
+  // Check rows
+  gameBoard.getGameState().at(0).at(0) == "O" &&
+  gameBoard.getGameState().at(0).at(1) == "O" &&
+  gameBoard.getGameState().at(0).at(2) == "O" ||
+  gameBoard.getGameState().at(1).at(0) == "O" &&
+  gameBoard.getGameState().at(1).at(1) == "O" &&
+  gameBoard.getGameState().at(1).at(2) == "O" ||
+  gameBoard.getGameState().at(2).at(0) == "O" &&
+  gameBoard.getGameState().at(2).at(1) == "O" &&
+  gameBoard.getGameState().at(2).at(2) == "O" ||
+
+  // Check columns
+  gameBoard.getGameState().at(0).at(0) == "O" &&
+  gameBoard.getGameState().at(1).at(0) == "O" &&
+  gameBoard.getGameState().at(2).at(0) == "O" ||
+  gameBoard.getGameState().at(0).at(1) == "O" &&
+  gameBoard.getGameState().at(1).at(1) == "O" &&
+  gameBoard.getGameState().at(2).at(1) == "O" ||
+  gameBoard.getGameState().at(0).at(2) == "O" &&
+  gameBoard.getGameState().at(1).at(2) == "O" &&
+  gameBoard.getGameState().at(2).at(2) == "O" ||
+
+  // Check diagonals
+  gameBoard.getGameState().at(0).at(0) == "O" &&
+  gameBoard.getGameState().at(1).at(1) == "O" &&
+  gameBoard.getGameState().at(2).at(2) == "O" ||
+  gameBoard.getGameState().at(0).at(2) == "O" &&
+  gameBoard.getGameState().at(1).at(1) == "O" &&
+  gameBoard.getGameState().at(2).at(0) == "O"
+)
+  {
+  p2Score++;
+  p2ScoreSelector.textContent = `${p2Score}`;
+ }
+}
+return{run}
 })();
